@@ -14,7 +14,6 @@ const sections = [
   }
 ];
 
-
 function App() {
   const name = useInput("Mr.", value => value.length < 20);
   const { currentItem, changeItem } = useTabs(0, sections);
@@ -34,12 +33,19 @@ function App() {
 
   const { enablePrevent, disablePrevent } = usePreventLeave();
 
+  const begForLife = () => console.log("Plz don't leave");
+  useBeforeLeave(begForLife);
+
   return (
     <div className="App">
         <h1>React Hooks</h1>
       <div>
         <h2>useInput</h2>
         <input placeholder="Name" {...name} />
+      </div>
+      <div>
+        <h2>useTitle</h2>
+        The page title will be changed after 5 seconds from this page opened.
       </div>
       <div>
         <h2>useTabs</h2>
@@ -63,6 +69,10 @@ function App() {
         <h2>usePreventLeave</h2>
         <button onClick={enablePrevent}>Enable prevent</button>
         <button onClick={disablePrevent}>Disable prevent</button>
+      </div>
+      <div>
+        <h2>useBeforeLeave</h2>
+        If the mouse pointer go out through top side of page, then a message will be printed on console.
       </div>
     </div>
   );
