@@ -1,7 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-import { useInput, useTabs, useTitle, useClick, useHover, useConfirm, usePreventLeave } from './hooks';
+import { 
+  useInput,
+  useTabs,
+  useTitle,
+  useClick,
+  useHover,
+  useConfirm,
+  usePreventLeave,
+  useBeforeLeave,
+  useFadeIn,
+  useNetwork,
+} from './hooks';
 
 const sections = [
   {
@@ -35,6 +46,14 @@ function App() {
 
   const begForLife = () => console.log("Plz don't leave");
   useBeforeLeave(begForLife);
+
+  const fadeInB = useFadeIn(1, 2);
+  const fadeInP = useFadeIn(5, 10);
+
+  const handleNetworkChange = online => {
+    console.log(online ? 'We just went online' : 'We are offline');
+  }
+  const online = useNetwork(handleNetworkChange);
 
   return (
     <div className="App">
@@ -73,6 +92,15 @@ function App() {
       <div>
         <h2>useBeforeLeave</h2>
         If the mouse pointer go out through top side of page, then a message will be printed on console.
+      </div>
+      <div>
+        <h2>useFadeIn</h2>
+        <b {...fadeInB}>Fade-in animation</b>
+        <p {...fadeInP}>lalalalalalalalalalalala</p>
+      </div>
+      <div>
+        <h2>useNetwork</h2>
+        <h3>{online ? 'Online' : 'Offline'}</h3>
       </div>
     </div>
   );
