@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-import { useInput, useTabs, useTitle, useClick, useHover } from './hooks';
+import { useInput, useTabs, useTitle, useClick, useHover, useConfirm, usePreventLeave } from './hooks';
 
 const sections = [
   {
@@ -13,6 +13,7 @@ const sections = [
     content: 'Content 2',
   }
 ];
+
 
 function App() {
   const name = useInput("Mr.", value => value.length < 20);
@@ -26,6 +27,12 @@ function App() {
 
   const onHover = () => console.log("hover!")
   const hoverRef = useHover(onHover);
+
+  const deleteWorld = () => console.log('Delete the world...');
+  const abort = () => console.log('You save the world...');
+  const confirmDelete = useConfirm("Are you sure?", deleteWorld, abort);
+
+  const { enablePrevent, disablePrevent } = usePreventLeave();
 
   return (
     <div className="App">
@@ -47,6 +54,15 @@ function App() {
       <div>
         <h2>useHover</h2>
         <span ref={hoverRef}>Hover here!!!</span>
+      </div>
+      <div>
+        <h2>useConfirm</h2>
+        <button onClick={confirmDelete}>Delete the world</button>
+      </div>
+      <div>
+        <h2>usePreventLeave</h2>
+        <button onClick={enablePrevent}>Enable prevent</button>
+        <button onClick={disablePrevent}>Disable prevent</button>
       </div>
     </div>
   );
