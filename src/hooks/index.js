@@ -8,3 +8,5 @@ export { default as usePreventLeave } from './usePreventLeave';
 export { default as useBeforeLeave } from './useBeforeLeave';
 export { default as useFadeIn } from './useFadeIn';
 export { default as useNetwork } from './useNetwork';
+export { default as useScroll } from './useScroll';
+export { default as useFullscreen } from './useFullscreen';

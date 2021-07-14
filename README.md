@@ -10,9 +10,9 @@ React Hooks to practice react hooks
 - [x] useConfirm
 - [x] usePreventLeave
 - [x] useBeforeLeave
-- [ ] useFadeIn
-- [ ] useFullscreen
-- [ ] useNetwork
+- [x] useFadeIn
+- [x] useNetwork
+- [x] useScroll
+- [x] useFullscreen
 - [ ] useNotification
-- [ ] useScroll
 - [ ] useAxios

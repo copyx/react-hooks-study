@@ -12,6 +12,8 @@ import {
   useBeforeLeave,
   useFadeIn,
   useNetwork,
+  useScroll,
+  useFullscreen,
 } from './hooks';
 
 const sections = [
@@ -55,8 +57,15 @@ function App() {
   }
   const online = useNetwork(handleNetworkChange);
 
+  const { y } = useScroll();
+
+  const onFullscreen = (isFull) => {
+    console.log(isFull ? 'We are fullscreen' : 'We are small');
+  }
+  const { element: fulllscreenEl, triggerFullscreen, exitFullscreen } = useFullscreen(onFullscreen);
+
   return (
-    <div className="App">
+    <div className="App" style={{ height: '1000vh' }}>
         <h1>React Hooks</h1>
       <div>
         <h2>useInput</h2>
@@ -100,7 +109,16 @@ function App() {
       </div>
       <div>
         <h2>useNetwork</h2>
-        <h3>{online ? 'Online' : 'Offline'}</h3>
+        <p>{online ? 'Online' : 'Offline'}</p>
+      </div>
+      <div>
+        <h2>useScroll</h2>
+        <p style={{ color: y > 100 ? 'red' : 'blue' }}>The color of this text will be changed by scrolling</p>
+      </div>
+      <div>
+        <h2>useFullscreen</h2>
+        <img ref={fulllscreenEl} onClick={exitFullscreen} src='https://i.imgur.com/0n3860Y.jpg' style={{ width: '100px' }} alt='Chuu' />
+        <button onClick={triggerFullscreen}>Make fullscreen!</button>
       </div>
     </div>
   );
