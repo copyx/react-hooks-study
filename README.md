@@ -14,5 +14,5 @@ React Hooks to practice react hooks
 - [x] useNetwork
 - [x] useScroll
 - [x] useFullscreen
-- [ ] useNotification
-- [ ] useAxios
+- [x] useNotification
+- [x] useAxios

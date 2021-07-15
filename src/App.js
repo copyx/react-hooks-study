@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import './App.css';
 
 import { 
@@ -14,6 +14,8 @@ import {
   useNetwork,
   useScroll,
   useFullscreen,
+  useNotification,
+  useAxios,
 } from './hooks';
 
 const sections = [
@@ -63,6 +65,11 @@ function App() {
     console.log(isFull ? 'We are fullscreen' : 'We are small');
   }
   const { element: fulllscreenEl, triggerFullscreen, exitFullscreen } = useFullscreen(onFullscreen);
+
+  const triggerNotification = useNotification('Wow!!!', { body: 'It is amazing!' });
+
+  const { state: { loading, data, error }, refetch } = useAxios({ url: 'https://yts.mx/api/v2/list_movies.json' })
+  console.log(`Loading: ${loading}\nData: ${JSON.stringify(data)}\nError: ${error}`);
 
   return (
     <div className="App" style={{ height: '1000vh' }}>
@@ -119,6 +126,17 @@ function App() {
         <h2>useFullscreen</h2>
         <img ref={fulllscreenEl} onClick={exitFullscreen} src='https://i.imgur.com/0n3860Y.jpg' style={{ width: '100px' }} alt='Chuu' />
         <button onClick={triggerFullscreen}>Make fullscreen!</button>
+      </div>
+      <div>
+        <h2>useNotification</h2>
+        <button onClick={triggerNotification}>Show notification</button>
+      </div>
+      <div>
+        <h2>useAxios</h2>
+        {loading && <h4>Loading</h4>}
+        {error && <h4>Error: ${error}</h4>}
+        <button onClick={refetch}>Refetch</button>
+        {data && <p>${JSON.stringify(data)}</p>}
       </div>
     </div>
   );
